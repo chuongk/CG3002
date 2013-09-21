@@ -12,7 +12,7 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 
 int main(int argc, char *argv[])
 {
-	CURL *curl;
+	/*CURL *curl;
     FILE *fp;
     CURLcode res;
     char *url = "google.com";
@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
 		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-        res = curl_easy_perform(curl);
+        res = curl_easy_perform(curl);*/
         /* always cleanup */
-        curl_easy_cleanup(curl);
+        /*curl_easy_cleanup(curl);
         fclose(fp);
-    }
+    }*/
 	QApplication a(argc, argv);
 	qt_test w;
 	w.show();
