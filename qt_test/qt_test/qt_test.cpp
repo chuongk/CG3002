@@ -1,0 +1,118 @@
+#include "qt_test.h"
+#include <sql_Connector.h> // Strange, cannot include it in the qt_test.h file
+qt_test::qt_test(QWidget *parent)
+	: QMainWindow(parent)
+{
+	ui.setupUi(this);
+}
+
+qt_test::~qt_test()
+{
+
+}
+
+void qt_test::on_pushButton_clicked()
+{
+	ui.textEdit->setText("hello world!");
+	//Open a web url from browser
+	QString link = "http://localhost/phpmyadmin/";
+	QDesktopServices::openUrl(QUrl(link));
+}
+
+void qt_test::on_dateEdit_dateChanged(const QDate &date)
+{
+	QTableWidget *table=new QTableWidget(0,2,0);
+
+	table->insertColumn(0);
+	table->setHorizontalHeaderItem(0, new QTableWidgetItem("Whatever"));
+	ui.textEdit_2->setText(date.toString());
+	//ui.tableWidget->hide();
+	table->show();
+}
+
+/*
+	When the button is clicked, take the barcode value from the barcode_line and search the item based on that barcode
+*/
+
+void qt_test::on_SearchButton_clicked()
+{
+	int j = ui.item_table->rowCount();
+	if (j>0)
+	{
+		for (int i=0;i<j;i++)
+			ui.item_table->removeRow(i);
+		j=0;
+	}
+	int iid=0;
+	int iname=1;
+	int icate=2;
+	int imanu=3;
+	int price=4;
+	int lstock=5;
+	int minStock=6;
+	int bundle=7;
+	QString barcode=ui.barcode_line->text();
+	string barcod=barcode.toStdString();
+	if (barcod.length()<=BARCODE_LENGTH)
+	{
+		Item *tmp=new Item();
+		// Set up sql_connector to access database
+		sql_Connector *contor=new sql_Connector();
+		contor->start_Connect();
+		contor->chooseDB("CG3002");
+		if (contor->search_from_barcode( atoi(barcod.c_str()),tmp)==1)
+		{
+			QString val;
+			ui.lineEdit->setText(barcode);
+			ui.item_table->insertRow(j);
+			ui.item_table->setSortingEnabled(false);
+			QTableWidgetItem *item1;
+
+			for (int z=0;z<8;z++)
+			{
+				switch(z)
+				{
+				case 0:
+					//Fill in item Id;
+					val= QString::fromStdString(tmp->get_ItemID_toStr());
+					break;
+				case 1:
+					//Fill in item_name;
+					val= QString::fromStdString(tmp->get_ItemName());
+					break;
+				case 2:
+					//Fill in category;
+					val = QString::fromStdString(tmp->get_ItemCategory());
+					break;
+				case 3:
+					//Fill in manufacturer:
+					val = QString::fromStdString(tmp->get_ItemManufacturer());
+					break;
+				case 4:
+					//Fill in price;
+					val = QString::fromStdString(tmp->get_ItemPrice_toStr());
+					break;
+				case 5:
+					//Fill in local stock;
+					val = QString::fromStdString(tmp->get_ItemLocalStock_toStr());
+					break;
+				case 6:
+					//Fill in minimum stock;
+					val = QString::fromStdString(tmp->get_ItemMinStock_toStr());
+					break;
+				case 7:
+					//Fill in bundle
+					val = QString::fromStdString(tmp->get_ItemBundelUnit_toStr());
+					break;
+				}
+				//ui.item_table->setRowCount(j);
+				ui.item_table->setItem(j,z,new QTableWidgetItem(val));
+			}
+			
+		}
+
+		delete contor;
+		delete tmp;
+	}
+
+}
