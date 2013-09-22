@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <vector>
 using namespace std;
 /*
 	This class defines the item object, its attribute and further functions if necessary

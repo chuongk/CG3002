@@ -54,9 +54,11 @@ public:
 	void insert_Transaction_from_FILE(string file_name);
 	void populate_cashier_test();
 	int search_from_barcode(int barcode,Item *Ifind);
+	int search_general(string barcode,string iName,string iCate, string iManu,vector<Item*> &iList);
 private:
 	void populate_Cashier_from_FILE(string file_name,int SID);
 	string toDate(string toCut);
+	string makeSearchQuery(string barcode,string iName,string iCate, string iManu);
 };
 
 #endif

@@ -36,83 +36,99 @@ void qt_test::on_dateEdit_dateChanged(const QDate &date)
 
 void qt_test::on_SearchButton_clicked()
 {
+	
+	//ui.item_table->clear();
+
 	int j = ui.item_table->rowCount();
 	if (j>0)
 	{
 		for (int i=0;i<j;i++)
-			ui.item_table->removeRow(i);
+			ui.item_table->removeRow(0);
 		j=0;
 	}
-	int iid=0;
+	/*int iid=0;
 	int iname=1;
 	int icate=2;
 	int imanu=3;
 	int price=4;
 	int lstock=5;
 	int minStock=6;
-	int bundle=7;
+	int bundle=7;*/
 	QString barcode=ui.barcode_line->text();
+	QString iName=ui.name_line->text();
+	QString iCate=ui.cate_line->text();
+	QString iManu=ui.manu_line->text();
 	string barcod=barcode.toStdString();
+	string iNam=iName.toStdString();
+	string iCat=iCate.toStdString();
+	string iMan=iManu.toStdString();
+	vector<Item*> iList;
 	if (barcod.length()<=BARCODE_LENGTH)
 	{
-		Item *tmp=new Item();
+		//Item *tmp=new Item();
+		Item *tmp;
 		// Set up sql_connector to access database
 		sql_Connector *contor=new sql_Connector();
 		contor->start_Connect();
 		contor->chooseDB("CG3002");
-		if (contor->search_from_barcode( atoi(barcod.c_str()),tmp)==1)
+		//if (contor->search_from_barcode( atoi(barcod.c_str()),tmp)==1)
+		if (contor->search_general(barcod,iNam,iCat,iMan,iList))
 		{
-			QString val;
-			ui.lineEdit->setText(barcode);
-			ui.item_table->insertRow(j);
-			ui.item_table->setSortingEnabled(false);
-			QTableWidgetItem *item1;
-
-			for (int z=0;z<8;z++)
+			int size=iList.size();
+			for (int i=0;i<size;i++)
 			{
-				switch(z)
+				QString val;
+				ui.item_table->insertRow(j);
+				ui.item_table->setSortingEnabled(false);
+				QTableWidgetItem *item1;
+				tmp=iList[i];
+				for (int z=0;z<8;z++)
 				{
-				case 0:
-					//Fill in item Id;
-					val= QString::fromStdString(tmp->get_ItemID_toStr());
-					break;
-				case 1:
-					//Fill in item_name;
-					val= QString::fromStdString(tmp->get_ItemName());
-					break;
-				case 2:
-					//Fill in category;
-					val = QString::fromStdString(tmp->get_ItemCategory());
-					break;
-				case 3:
-					//Fill in manufacturer:
-					val = QString::fromStdString(tmp->get_ItemManufacturer());
-					break;
-				case 4:
-					//Fill in price;
-					val = QString::fromStdString(tmp->get_ItemPrice_toStr());
-					break;
-				case 5:
-					//Fill in local stock;
-					val = QString::fromStdString(tmp->get_ItemLocalStock_toStr());
-					break;
-				case 6:
-					//Fill in minimum stock;
-					val = QString::fromStdString(tmp->get_ItemMinStock_toStr());
-					break;
-				case 7:
-					//Fill in bundle
-					val = QString::fromStdString(tmp->get_ItemBundelUnit_toStr());
-					break;
+					switch(z)
+					{
+					case 0:
+						//Fill in item Id;
+						val= QString::fromStdString(tmp->get_ItemID_toStr());
+						break;
+					case 1:
+						//Fill in item_name;
+						val= QString::fromStdString(tmp->get_ItemName());
+						break;
+					case 2:
+						//Fill in category;
+						val = QString::fromStdString(tmp->get_ItemCategory());
+						break;
+					case 3:
+						//Fill in manufacturer:
+						val = QString::fromStdString(tmp->get_ItemManufacturer());
+						break;
+					case 4:
+						//Fill in price;
+						val = QString::fromStdString(tmp->get_ItemPrice_toStr());
+						break;
+					case 5:
+						//Fill in local stock;
+						val = QString::fromStdString(tmp->get_ItemLocalStock_toStr());
+						break;
+					case 6:
+						//Fill in minimum stock;
+						val = QString::fromStdString(tmp->get_ItemMinStock_toStr());
+						break;
+					case 7:
+						//Fill in bundle
+						val = QString::fromStdString(tmp->get_ItemBundelUnit_toStr());
+						break;
+					}
+					//ui.item_table->setRowCount(j);
+					ui.item_table->setItem(j,z,new QTableWidgetItem(val));
 				}
-				//ui.item_table->setRowCount(j);
-				ui.item_table->setItem(j,z,new QTableWidgetItem(val));
+				delete tmp;
 			}
+			iList.clear();
 			
 		}
 
 		delete contor;
-		delete tmp;
 	}
 
 }

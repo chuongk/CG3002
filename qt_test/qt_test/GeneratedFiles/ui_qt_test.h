@@ -43,7 +43,18 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QLineEdit *barcode_line;
-    QLineEdit *lineEdit;
+    QWidget *layoutWidget_2;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *label_2;
+    QLineEdit *name_line;
+    QWidget *layoutWidget_3;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_3;
+    QLineEdit *cate_line;
+    QWidget *layoutWidget_4;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_4;
+    QLineEdit *manu_line;
     QWidget *tab;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
@@ -112,7 +123,7 @@ public:
         item_table->setLayoutDirection(Qt::LeftToRight);
         layoutWidget = new QWidget(tab_3);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 181, 41));
+        layoutWidget->setGeometry(QRect(0, 0, 131, 41));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -129,9 +140,63 @@ public:
 
         verticalLayout->addWidget(barcode_line);
 
-        lineEdit = new QLineEdit(tab_3);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(250, 10, 113, 20));
+        layoutWidget_2 = new QWidget(tab_3);
+        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
+        layoutWidget_2->setGeometry(QRect(130, 0, 131, 41));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget_2);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        label_2 = new QLabel(layoutWidget_2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_2->addWidget(label_2);
+
+        name_line = new QLineEdit(layoutWidget_2);
+        name_line->setObjectName(QStringLiteral("name_line"));
+
+        verticalLayout_2->addWidget(name_line);
+
+        layoutWidget_3 = new QWidget(tab_3);
+        layoutWidget_3->setObjectName(QStringLiteral("layoutWidget_3"));
+        layoutWidget_3->setGeometry(QRect(260, 0, 131, 41));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget_3);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        label_3 = new QLabel(layoutWidget_3);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_3->addWidget(label_3);
+
+        cate_line = new QLineEdit(layoutWidget_3);
+        cate_line->setObjectName(QStringLiteral("cate_line"));
+
+        verticalLayout_3->addWidget(cate_line);
+
+        layoutWidget_4 = new QWidget(tab_3);
+        layoutWidget_4->setObjectName(QStringLiteral("layoutWidget_4"));
+        layoutWidget_4->setGeometry(QRect(390, 0, 131, 41));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget_4);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        label_4 = new QLabel(layoutWidget_4);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_4->addWidget(label_4);
+
+        manu_line = new QLineEdit(layoutWidget_4);
+        manu_line->setObjectName(QStringLiteral("manu_line"));
+
+        verticalLayout_4->addWidget(manu_line);
+
         tabWidget->addTab(tab_3, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
@@ -214,6 +279,12 @@ public:
         ___qtablewidgetitem7->setText(QApplication::translate("qt_testClass", "bundle_unit", 0));
         label->setText(QApplication::translate("qt_testClass", "Barcode ", 0));
         barcode_line->setText(QString());
+        label_2->setText(QApplication::translate("qt_testClass", "Name", 0));
+        name_line->setText(QString());
+        label_3->setText(QApplication::translate("qt_testClass", "Category", 0));
+        cate_line->setText(QString());
+        label_4->setText(QApplication::translate("qt_testClass", "Manufacturer", 0));
+        manu_line->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("qt_testClass", "Search Item", 0));
         pushButton->setText(QApplication::translate("qt_testClass", "PushButton", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("qt_testClass", "To PHP MyAdmin", 0));

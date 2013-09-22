@@ -320,7 +320,7 @@ int sql_Connector::search_from_barcode(int barcode,Item *Ifind)
 		int count=0;
 		ostringstream convert;   // stream used for the conversion
 		convert << barcode;      // insert the textual representation of 'Number' in the characters in the stream
-		string query="SELECT * FROM item i WHERE i.itemId=" + convert.str() ; 
+		string query="SELECT * FROM item i WHERE i.itemId=" + convert.str() + " and i.itemName=i.itemName" ; 
 		stmt=con->createStatement();
 		res=stmt->executeQuery(query);
 		while (res->next())
@@ -346,4 +346,71 @@ int sql_Connector::search_from_barcode(int barcode,Item *Ifind)
 		exit(1);
 	}
 
+}
+
+/*
+	This function takes in the string barcode, name, category and manufacture( allow empty string)
+	Compute the search base on the info given
+	Return 0 if find at
+*/
+int sql_Connector::search_general(string barcode,string iName,string iCate, string iManu,vector<Item*> &iList)
+{
+	string query=makeSearchQuery(barcode,iName,iCate,iManu);
+	Item *Ifind;
+	try
+	{
+		int count=0;
+		stmt=con->createStatement();
+		res=stmt->executeQuery(query);
+		while (res->next())
+		{
+			count++;
+			Ifind=new Item();
+			Ifind->set_ItemID(res->getInt("itemId"));
+			Ifind->set_ItemName(res->getString("itemName"));
+			Ifind->set_ItemCategory(res->getString("category"));
+			Ifind->set_ItemManufacturer(res->getString("manufacturer"));
+			Ifind->set_ItemPrice(res->getDouble("price"));
+			Ifind->set_ItemLocalStock(res->getInt("local_stock"));
+			Ifind->setItemMinStock(res->getInt("minimum_stock"));
+			Ifind->setItemBundleUnit(res->getInt("bundle_unit"));
+			iList.push_back(Ifind);
+		}
+		if (count<1)
+			return 0;
+		else
+			return 1;
+	}
+	catch (sql::SQLException &e) {
+		std::cout<<e.what()<<endl;
+		system("PAUSE");
+		exit(1);
+	}
+}
+
+string sql_Connector::makeSearchQuery(string barcode,string iName,string iCate, string iManu)
+{
+	string result="SELECT * FROM item i WHERE ";
+	string bar,Name,Cate,Manu;
+	if (barcode.length()==0)
+		result+="i.itemId=i.itemId and ";
+	else
+		result+="i.itemId= "+barcode+ " and ";
+
+	if (iName.length()==0)
+		result+="i.itemName=i.itemName and ";
+	else
+		result+="i.itemName=\'"+iName+ "\' and ";
+
+	if (iCate.length()==0)
+		result+="i.category=i.category and ";
+	else
+		result+="i.category=\'"+iCate+ "\' and ";
+
+	if (iManu.length()==0)
+		result+="i.manufacturer=i.manufacturer ";
+	else
+		result+="i.manufacturer=\'"+iManu+"\'";
+
+	return result;
 }
