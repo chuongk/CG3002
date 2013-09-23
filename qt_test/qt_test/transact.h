@@ -4,7 +4,8 @@
 #include <QWidget>
 #include "ui_transact.h"
 #include <string.h>
-
+#include "sql_Connector.h"
+using namespace std;
 class transact : public QWidget
 {
 	Q_OBJECT
@@ -20,6 +21,9 @@ private:
 	Ui::transact ui;
 	bool is_number(const std::string& s);
 	int check_transact_syntax();
+	double check_barcode(string barcode,string quantity,int ro,sql_Connector *contor);
+	int check_cashier(string cId, string quantity, int ro, sql_Connector *contor);
+	void Initialize();
 };
 
 #endif // TRANSACT_H

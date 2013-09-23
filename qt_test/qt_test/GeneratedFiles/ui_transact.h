@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
@@ -30,12 +31,13 @@ public:
     QPushButton *transact_Item_add;
     QPushButton *transact_Submit;
     QPushButton *transact_Cancel;
+    QLabel *transact_res;
 
     void setupUi(QWidget *transact)
     {
         if (transact->objectName().isEmpty())
             transact->setObjectName(QStringLiteral("transact"));
-        transact->resize(402, 219);
+        transact->resize(404, 266);
         transact_table = new QTableWidget(transact);
         if (transact_table->columnCount() < 4)
             transact_table->setColumnCount(4);
@@ -55,7 +57,7 @@ public:
         __qtablewidgetitem3->setFont(font);
         transact_table->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         transact_table->setObjectName(QStringLiteral("transact_table"));
-        transact_table->setGeometry(QRect(0, 30, 401, 192));
+        transact_table->setGeometry(QRect(0, 70, 401, 192));
         layoutWidget = new QWidget(transact);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(0, 0, 239, 25));
@@ -79,6 +81,10 @@ public:
 
         horizontalLayout->addWidget(transact_Cancel);
 
+        transact_res = new QLabel(transact);
+        transact_res->setObjectName(QStringLiteral("transact_res"));
+        transact_res->setGeometry(QRect(250, 10, 141, 41));
+        transact_res->setWordWrap(true);
 
         retranslateUi(transact);
 
@@ -95,10 +101,11 @@ public:
         QTableWidgetItem *___qtablewidgetitem2 = transact_table->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QApplication::translate("transact", "Cashier ID", 0));
         QTableWidgetItem *___qtablewidgetitem3 = transact_table->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("transact", "Price", 0));
+        ___qtablewidgetitem3->setText(QApplication::translate("transact", "Price/Item", 0));
         transact_Item_add->setText(QApplication::translate("transact", "Add Item", 0));
         transact_Submit->setText(QApplication::translate("transact", "Submit", 0));
         transact_Cancel->setText(QApplication::translate("transact", "Cancel", 0));
+        transact_res->setText(QApplication::translate("transact", "TextLabel", 0));
     } // retranslateUi
 
 };

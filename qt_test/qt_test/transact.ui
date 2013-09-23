@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>219</height>
+    <width>404</width>
+    <height>266</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>30</y>
+     <y>70</y>
      <width>401</width>
      <height>192</height>
     </rect>
@@ -57,7 +57,7 @@
    </column>
    <column>
     <property name="text">
-     <string>Price</string>
+     <string>Price/Item</string>
     </property>
     <property name="font">
      <font>
@@ -99,6 +99,22 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="transact_res">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>10</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

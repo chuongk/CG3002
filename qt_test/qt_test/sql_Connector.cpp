@@ -457,9 +457,6 @@ int sql_Connector::insert_new_Transaction(string barcode, string iQuantity,strin
 		return 1;
 	}
 	catch (sql::SQLException &e) {
-		std::cout<<e.what()<<endl;
-		system("PAUSE");
-		exit(1);
 		return 0;
 	}
 }
