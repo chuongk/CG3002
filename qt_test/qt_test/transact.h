@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "ui_transact.h"
+#include <string.h>
 
 class transact : public QWidget
 {
@@ -17,6 +18,8 @@ public:
 		void on_transact_Submit_clicked();
 private:
 	Ui::transact ui;
+	bool is_number(const std::string& s);
+	int check_transact_syntax();
 };
 
 #endif // TRANSACT_H

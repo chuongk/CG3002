@@ -355,6 +355,9 @@ int sql_Connector::search_from_barcode(int barcode,Item *Ifind)
 */
 int sql_Connector::search_general(string barcode,string iName,string iCate, string iManu,vector<Item*> &iList)
 {
+	if (!(barcode.length() || iName.length() || iCate.length() || iManu.length()))
+		return 0;
+
 	string query=makeSearchQuery(barcode,iName,iCate,iManu);
 	Item *Ifind;
 	try
@@ -386,9 +389,7 @@ int sql_Connector::search_general(string barcode,string iName,string iCate, stri
 		res=NULL;
 	}
 	catch (sql::SQLException &e) {
-		std::cout<<e.what()<<endl;
-		system("PAUSE");
-		exit(1);
+		return 0;
 	}
 }
 
@@ -396,6 +397,7 @@ string sql_Connector::makeSearchQuery(string barcode,string iName,string iCate, 
 {
 	string result="SELECT * FROM item i WHERE ";
 	string bar,Name,Cate,Manu;
+
 	if (barcode.length()==0)
 		result+="i.itemId=i.itemId and ";
 	else

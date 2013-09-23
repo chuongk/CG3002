@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>302</width>
-    <height>221</height>
+    <width>402</width>
+    <height>219</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <rect>
      <x>0</x>
      <y>30</y>
-     <width>301</width>
+     <width>401</width>
      <height>192</height>
     </rect>
    </property>
@@ -47,6 +47,17 @@
    <column>
     <property name="text">
      <string>Cashier ID</string>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Price</string>
     </property>
     <property name="font">
      <font>

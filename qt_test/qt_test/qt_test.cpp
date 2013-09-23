@@ -5,7 +5,18 @@ qt_test::qt_test(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	Initialize();
 }
+
+
+/*
+	Do any intialization here
+*/
+void qt_test::Initialize()
+{
+	
+}
+
 
 qt_test::~qt_test()
 {
@@ -40,9 +51,6 @@ void qt_test::on_dateEdit_dateChanged(const QDate &date)
 
 void qt_test::on_SearchButton_clicked()
 {
-	
-	//ui.item_table->clear();
-
 	int j = ui.item_table->rowCount();
 	if (j>0)
 	{
@@ -50,14 +58,8 @@ void qt_test::on_SearchButton_clicked()
 			ui.item_table->removeRow(0);
 		j=0;
 	}
-	/*int iid=0;
-	int iname=1;
-	int icate=2;
-	int imanu=3;
-	int price=4;
-	int lstock=5;
-	int minStock=6;
-	int bundle=7;*/
+	
+	QString label_result="Empty Result!";
 	QString barcode=ui.barcode_line->text();
 	QString iName=ui.name_line->text();
 	QString iCate=ui.cate_line->text();
@@ -67,6 +69,7 @@ void qt_test::on_SearchButton_clicked()
 	string iCat=iCate.toStdString();
 	string iMan=iManu.toStdString();
 	vector<Item*> iList;
+	ui.result_label->setStyleSheet("QLabel { color : red; font: bold 14px; }");
 	if (barcod.length()<=BARCODE_LENGTH)
 	{
 		//Item *tmp=new Item();
@@ -130,9 +133,11 @@ void qt_test::on_SearchButton_clicked()
 			}
 			iList.clear();
 			
+			ostringstream convert;   // stream used for the conversion
+			convert << size;      // insert the textual representation of 'Number' in the characters in the stream
+			label_result= QString::fromStdString(convert.str()) + " results";
 		}
-
 		delete contor;
 	}
-
+	ui.result_label->setText(label_result);
 }

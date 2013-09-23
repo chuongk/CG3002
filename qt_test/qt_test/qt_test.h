@@ -20,6 +20,7 @@ public:
 
 private:
 	Ui::qt_testClass ui;
+	void Initialize();
 	public slots:
 		void on_pushButton_clicked();
 		void on_dateEdit_dateChanged(const QDate &date);

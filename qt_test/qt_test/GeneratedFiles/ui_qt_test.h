@@ -55,6 +55,7 @@ public:
     QVBoxLayout *verticalLayout_4;
     QLabel *label_4;
     QLineEdit *manu_line;
+    QLabel *result_label;
     QWidget *tab;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
@@ -72,18 +73,18 @@ public:
     {
         if (qt_testClass->objectName().isEmpty())
             qt_testClass->setObjectName(QStringLiteral("qt_testClass"));
-        qt_testClass->resize(699, 422);
+        qt_testClass->resize(722, 432);
         centralWidget = new QWidget(qt_testClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(0, 0, 701, 381));
+        tabWidget->setGeometry(QRect(0, 0, 721, 381));
         tabWidget->setAutoFillBackground(false);
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
         SearchButton = new QPushButton(tab_3);
         SearchButton->setObjectName(QStringLiteral("SearchButton"));
-        SearchButton->setGeometry(QRect(600, 10, 75, 23));
+        SearchButton->setGeometry(QRect(640, 10, 75, 23));
         item_table = new QTableWidget(tab_3);
         if (item_table->columnCount() < 8)
             item_table->setColumnCount(8);
@@ -115,7 +116,7 @@ public:
         __qtablewidgetitem7->setFont(font);
         item_table->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         item_table->setObjectName(QStringLiteral("item_table"));
-        item_table->setGeometry(QRect(0, 40, 691, 301));
+        item_table->setGeometry(QRect(0, 50, 711, 301));
         QFont font1;
         font1.setBold(false);
         font1.setWeight(50);
@@ -197,6 +198,9 @@ public:
 
         verticalLayout_4->addWidget(manu_line);
 
+        result_label = new QLabel(tab_3);
+        result_label->setObjectName(QStringLiteral("result_label"));
+        result_label->setGeometry(QRect(530, 10, 111, 21));
         tabWidget->addTab(tab_3, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
@@ -240,7 +244,7 @@ public:
         qt_testClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(qt_testClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 699, 21));
+        menuBar->setGeometry(QRect(0, 0, 722, 21));
         qt_testClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(qt_testClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -285,6 +289,7 @@ public:
         cate_line->setText(QString());
         label_4->setText(QApplication::translate("qt_testClass", "Manufacturer", 0));
         manu_line->setText(QString());
+        result_label->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("qt_testClass", "Search Item", 0));
         pushButton->setText(QApplication::translate("qt_testClass", "PushButton", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("qt_testClass", "To PHP MyAdmin", 0));
