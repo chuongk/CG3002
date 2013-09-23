@@ -55,6 +55,7 @@ public:
 	void populate_cashier_test();
 	int search_from_barcode(int barcode,Item *Ifind);
 	int search_general(string barcode,string iName,string iCate, string iManu,vector<Item*> &iList);
+	int insert_new_Transaction(string barcode, string iQuantity,string cashierID);
 private:
 	void populate_Cashier_from_FILE(string file_name,int SID);
 	string toDate(string toCut);

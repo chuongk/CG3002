@@ -380,6 +380,10 @@ int sql_Connector::search_general(string barcode,string iName,string iCate, stri
 			return 0;
 		else
 			return 1;
+		delete stmt;
+		stmt=NULL;
+		delete res;
+		res=NULL;
 	}
 	catch (sql::SQLException &e) {
 		std::cout<<e.what()<<endl;
@@ -413,4 +417,47 @@ string sql_Connector::makeSearchQuery(string barcode,string iName,string iCate, 
 		result+="i.manufacturer=\'"+iManu+"\'";
 
 	return result;
+}
+
+/*
+	Insert a new transaction, date is current date
+*/
+int sql_Connector::insert_new_Transaction(string barcode, string iQuantity,string cashierID)
+{
+	try
+	{
+		string query="SELECT MAX(l.tId) AS highest_tID , l.tDate FROM local_transaction l WHERE l.tDate=CURDATE()" ; 
+		stmt=con->createStatement();
+		res=stmt->executeQuery(query);
+		res->first();
+		int newtID=res->getInt("highest_tID")+1;
+		string curDate=res->getString("tDate");
+		delete stmt;
+		stmt=NULL;
+		delete res;
+		res=NULL;
+
+		int cId=atoi(cashierID.c_str());
+		int itemId=atoi(barcode.c_str());
+		int Unit_Sold=atoi(iQuantity.c_str());
+
+		sql::PreparedStatement  *prep_stmt;
+		prep_stmt = con->prepareStatement("INSERT INTO local_transaction(tId, cId, itemId, Unit_Sold,tDate) VALUES (?, ?, ?, ?, ?)");
+		prep_stmt->setInt(1,newtID);
+		prep_stmt->setInt(2,cId);
+		prep_stmt->setInt(3,itemId);
+		prep_stmt->setInt(4,Unit_Sold);
+		prep_stmt->setString(5,curDate);
+
+		prep_stmt->executeUpdate();
+		delete prep_stmt;
+		prep_stmt=NULL;
+		return 1;
+	}
+	catch (sql::SQLException &e) {
+		std::cout<<e.what()<<endl;
+		system("PAUSE");
+		exit(1);
+		return 0;
+	}
 }

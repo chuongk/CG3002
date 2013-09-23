@@ -1,4 +1,5 @@
 #include "qt_test.h"
+#include "transact.h"
 #include <sql_Connector.h> // Strange, cannot include it in the qt_test.h file
 qt_test::qt_test(QWidget *parent)
 	: QMainWindow(parent)
@@ -21,13 +22,16 @@ void qt_test::on_pushButton_clicked()
 
 void qt_test::on_dateEdit_dateChanged(const QDate &date)
 {
-	QTableWidget *table=new QTableWidget(0,2,0);
+	transact *Itran= new transact();
+	Itran->show();
+	/*QTableWidget *table=new QTableWidget(0,2,0);
 
 	table->insertColumn(0);
 	table->setHorizontalHeaderItem(0, new QTableWidgetItem("Whatever"));
-	ui.textEdit_2->setText(date.toString());
+	table->insertRow(0);
+	ui.textEdit_2->setText(date.toString());*/
 	//ui.tableWidget->hide();
-	table->show();
+	//table->show();
 }
 
 /*
