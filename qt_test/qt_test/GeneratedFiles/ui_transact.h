@@ -16,6 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
@@ -32,6 +33,10 @@ public:
     QPushButton *transact_Submit;
     QPushButton *transact_Cancel;
     QLabel *transact_res;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label;
+    QLineEdit *transact_total_price;
 
     void setupUi(QWidget *transact)
     {
@@ -85,6 +90,25 @@ public:
         transact_res->setObjectName(QStringLiteral("transact_res"));
         transact_res->setGeometry(QRect(250, 10, 141, 41));
         transact_res->setWordWrap(true);
+        widget = new QWidget(transact);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(20, 40, 187, 22));
+        horizontalLayout_2 = new QHBoxLayout(widget);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        label = new QLabel(widget);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_2->addWidget(label);
+
+        transact_total_price = new QLineEdit(widget);
+        transact_total_price->setObjectName(QStringLiteral("transact_total_price"));
+        transact_total_price->setLayoutDirection(Qt::RightToLeft);
+
+        horizontalLayout_2->addWidget(transact_total_price);
+
 
         retranslateUi(transact);
 
@@ -106,6 +130,7 @@ public:
         transact_Submit->setText(QApplication::translate("transact", "Submit", 0));
         transact_Cancel->setText(QApplication::translate("transact", "Cancel", 0));
         transact_res->setText(QApplication::translate("transact", "TextLabel", 0));
+        label->setText(QApplication::translate("transact", "Total Price", 0));
     } // retranslateUi
 
 };

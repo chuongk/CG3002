@@ -460,3 +460,36 @@ int sql_Connector::insert_new_Transaction(string barcode, string iQuantity,strin
 		return 0;
 	}
 }
+
+
+/*
+	This function take the cId and search the cashier based on it
+	success: return 1;
+	no item: return 0;
+*/
+int sql_Connector::search_cashier_from_cId(int cId)
+{
+	try
+	{
+		int count=0;
+		ostringstream convert;   // stream used for the conversion
+		convert << cId;      // insert the textual representation of 'Number' in the characters in the stream
+		string query="SELECT * FROM cashier c WHERE c.cashierId=" + convert.str(); 
+		stmt=con->createStatement();
+		res=stmt->executeQuery(query);
+		while (res->next())
+		{
+			count++;
+		}
+		
+		if (!count)
+			return 0;
+		else
+			return 1;
+	}
+	catch (sql::SQLException &e) {
+		std::cout<<e.what()<<endl;
+		system("PAUSE");
+		exit(1);
+	}
+}

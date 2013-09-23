@@ -80,9 +80,19 @@ void transact::on_transact_Submit_clicked()
 			item_price=check_barcode(barcod,quantit,i,contor);
 			if (item_price < 0)
 				break;
+			transaction_price+=item_price;
 
 			// Check if cashier exists
+			if (!check_cashier(cashi,i,contor))
+				break;
+
+			// Finally insert the new Transactions
 			contor->insert_new_Transaction(barcod,quantit,cashi);
+
+			ostringstream convert;
+			convert << transaction_price;
+			
+			ui.transact_total_price->setText(QString::fromStdString(convert.str()));
 		}
 
 		delete contor;
@@ -200,7 +210,25 @@ double transact::check_barcode(string barcode,string quantity,int ro,sql_Connect
 	Return 1 if cashier exists
 	Return 0 if no
 */
-int transact::check_cashier(string cId, string quantity, int ro, sql_Connector *contor)
+int transact::check_cashier(string cId, int ro, sql_Connector *contor)
 {
-
+	ostringstream convert;
+	convert << cId;
+	int cashierId=atoi(convert.str().c_str());
+	convert.str("");
+	convert << (ro+1);
+	QString cur_row= QString::fromStdString(convert.str());
+	QString result="";
+	if (contor->search_cashier_from_cId(cashierId))
+	{
+		ui.transact_res->setText(result);
+		return 1;
+	}
+	else
+	{
+		ui.transact_res->setStyleSheet("QLabel { color : red; font: bold 12px; }");
+		result="cashier in row " + cur_row + " doesn't exist!";
+		ui.transact_res->setText(result);
+		return 0;
+	}
 }
