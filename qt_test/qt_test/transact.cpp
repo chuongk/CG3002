@@ -1,7 +1,7 @@
 #include "transact.h"
 #include "sql_Connector.h"
-transact::transact(QWidget *parent)
-	: QWidget(parent)
+transact::transact(QDialog *parent )
+	: QDialog(parent)
 {
 	ui.setupUi(this);
 	Initialize();
@@ -92,7 +92,9 @@ void transact::on_transact_Submit_clicked()
 			ostringstream convert;
 			convert << transaction_price;
 			
+			ui.transact_res->setStyleSheet("QLabel { color : green; font: bold 12px; }");
 			ui.transact_total_price->setText(QString::fromStdString(convert.str()));
+			ui.transact_res->setText("Updated transaction to record successfully, press cancel to quit ");
 		}
 
 		delete contor;
@@ -171,11 +173,12 @@ int transact::check_transact_syntax()
 }
 
 /*
-	Check if the barcode in row ro exists and return the total price of the item with the barcode
+	Check if the barcode in row "ro" exists with enough quantity and return the total price of the item with the barcode
 	return -1 if wrong
 */
 double transact::check_barcode(string barcode,string quantity,int ro,sql_Connector *contor)
 {
+	ui.transact_res->setStyleSheet("QLabel { color : red; font: bold 12px; }");
 	ostringstream convert;
 	convert << barcode;
 	int bar=atoi(convert.str().c_str());
@@ -189,17 +192,25 @@ double transact::check_barcode(string barcode,string quantity,int ro,sql_Connect
 	QString result;
 	if (contor->search_from_barcode(bar,tmp))
 	{
-		double price=tmp->get_ItemPrice();
-		double total_price=price*quan;
-		convert.str("");
-		convert<<price;
-		result=QString::fromStdString(convert.str());
-		ui.transact_table->setItem(ro,3,new QTableWidgetItem(result));
-		return total_price;
+		if (tmp->get_ItemLocalStock()>=quan)
+		{
+			double price=tmp->get_ItemPrice();
+			double total_price=price*quan;
+			convert.str("");
+			convert<<price;
+			result=QString::fromStdString(convert.str());
+			ui.transact_table->setItem(ro,3,new QTableWidgetItem(result));
+			return total_price;
+		}
+		else
+		{
+			result="item in row " + cur_row + " doesn't have enough stock!";
+			ui.transact_res->setText(result);
+			return -1;
+		}
 	}
 	else
 	{
-		ui.transact_res->setStyleSheet("QLabel { color : red; font: bold 12px; }");
 		result="barcode in row " + cur_row + " doesn't exist!";
 		ui.transact_res->setText(result);
 		return -1;

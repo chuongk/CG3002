@@ -33,7 +33,7 @@ public:
     QPushButton *transact_Submit;
     QPushButton *transact_Cancel;
     QLabel *transact_res;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLineEdit *transact_total_price;
@@ -42,6 +42,7 @@ public:
     {
         if (transact->objectName().isEmpty())
             transact->setObjectName(QStringLiteral("transact"));
+        transact->setWindowModality(Qt::NonModal);
         transact->resize(404, 266);
         transact_table = new QTableWidget(transact);
         if (transact_table->columnCount() < 4)
@@ -90,20 +91,20 @@ public:
         transact_res->setObjectName(QStringLiteral("transact_res"));
         transact_res->setGeometry(QRect(250, 10, 141, 41));
         transact_res->setWordWrap(true);
-        widget = new QWidget(transact);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(20, 40, 187, 22));
-        horizontalLayout_2 = new QHBoxLayout(widget);
+        layoutWidget1 = new QWidget(transact);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(20, 40, 187, 22));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget1);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout_2->addWidget(label);
 
-        transact_total_price = new QLineEdit(widget);
+        transact_total_price = new QLineEdit(layoutWidget1);
         transact_total_price->setObjectName(QStringLiteral("transact_total_price"));
         transact_total_price->setLayoutDirection(Qt::RightToLeft);
 

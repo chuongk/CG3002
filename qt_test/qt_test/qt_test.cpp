@@ -34,6 +34,10 @@ void qt_test::on_pushButton_clicked()
 void qt_test::on_dateEdit_dateChanged(const QDate &date)
 {
 	transact *Itran= new transact();
+	// Prevent choosing another window
+	Itran->setModal(true);
+	//Fixed the window size:
+	Itran->setFixedSize(TRANS_WIDTH,TRANS_HEIGHT);
 	Itran->show();
 	/*QTableWidget *table=new QTableWidget(0,2,0);
 

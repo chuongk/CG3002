@@ -428,6 +428,9 @@ int sql_Connector::insert_new_Transaction(string barcode, string iQuantity,strin
 {
 	try
 	{
+		//Update the Stock first
+		update_stock(barcode,iQuantity,REDUCE);
+
 		string query="SELECT MAX(l.tId) AS highest_tID , l.tDate FROM local_transaction l WHERE l.tDate=CURDATE()" ; 
 		stmt=con->createStatement();
 		res=stmt->executeQuery(query);
@@ -491,5 +494,31 @@ int sql_Connector::search_cashier_from_cId(int cId)
 		std::cout<<e.what()<<endl;
 		system("PAUSE");
 		exit(1);
+	}
+}
+
+/*
+	Update an item stock based on bardcode and quantity reduce
+	1: success
+	0: unsuccesful
+*/
+int sql_Connector::update_stock(string barcode, string iQuantity, UpStock type)
+{
+
+	try
+	{
+		string sign;
+		if (type== INCREASE)
+			sign = "+";
+		else
+			sign = "-";
+		string query="UPDATE item i SET i.local_stock=i.local_stock " + sign + " " + iQuantity + " WHERE i.itemId=" + barcode ; 
+		stmt=con->createStatement();
+		if (stmt->executeUpdate(query))
+			return 1;
+		return 0;
+	}
+	catch (sql::SQLException &e) {
+		return 0;
 	}
 }

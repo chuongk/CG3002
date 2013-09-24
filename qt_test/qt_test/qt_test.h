@@ -9,7 +9,8 @@
 
 
 #define BARCODE_LENGTH 8
-
+#define APP_WIDTH 722
+#define APP_HEIGHT 432
 class qt_test : public QMainWindow
 {
 	Q_OBJECT

@@ -2,16 +2,21 @@
 #define TRANSACT_H
 
 #include <QWidget>
+#include <qdialog.h>
 #include "ui_transact.h"
 #include <string.h>
 #include "sql_Connector.h"
 using namespace std;
-class transact : public QWidget
+
+#define TRANS_WIDTH 404
+#define TRANS_HEIGHT 266
+
+class transact : public QDialog
 {
 	Q_OBJECT
 
 public:
-	transact(QWidget *parent = 0);
+	transact(QDialog *parent = 0);
 	~transact();
 	public slots:
 		void on_transact_Cancel_clicked();

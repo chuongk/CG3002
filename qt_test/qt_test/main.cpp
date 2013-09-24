@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	qt_test w;
 	w.show();
+	w.setFixedSize(APP_WIDTH,APP_HEIGHT);
 	return a.exec();
 	/*QString a;
 	a="Luca";

@@ -29,7 +29,7 @@ using namespace sql;
 #define USR	"root"
 #define PWD	""
 
-
+enum UpStock { INCREASE, REDUCE};
 
 class sql_Connector
 {
@@ -58,6 +58,7 @@ public:
 	int insert_new_Transaction(string barcode, string iQuantity,string cashierID);
 
 	int search_cashier_from_cId(int cId);
+	int update_stock(string barcode, string iQuantity, UpStock type);
 private:
 	void populate_Cashier_from_FILE(string file_name,int SID);
 	string toDate(string toCut);
