@@ -26,6 +26,7 @@ private:
 		void on_pushButton_clicked();
 		void on_dateEdit_dateChanged(const QDate &date);
 		void on_SearchButton_clicked();
+		void on_sync_button_clicked();
 };
 
 #endif // QT_TEST_H

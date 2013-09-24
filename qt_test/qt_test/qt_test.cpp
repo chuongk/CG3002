@@ -139,9 +139,72 @@ void qt_test::on_SearchButton_clicked()
 			
 			ostringstream convert;   // stream used for the conversion
 			convert << size;      // insert the textual representation of 'Number' in the characters in the stream
+			ui.result_label->setStyleSheet("QLabel { color : green; font: bold 14px; }");
 			label_result= QString::fromStdString(convert.str()) + " results";
 		}
 		delete contor;
 	}
 	ui.result_label->setText(label_result);
+}
+
+void qt_test::on_sync_button_clicked()
+{
+	int j = ui.transact_report->rowCount();
+	if (j>0)
+	{
+		for (int i=0;i<j;i++)
+			ui.transact_report->removeRow(0);
+		j=0;
+	}
+	vector<Transaction *> iList;
+	Transaction *tmp;
+	int size,i;
+	double revenue;
+	// Set up sql_connector to access database
+	sql_Connector *contor=new sql_Connector();
+	contor->start_Connect();
+	contor->chooseDB("CG3002");
+	contor->get_Curdate_Transaction(iList);
+	size=iList.size();
+	for (i=0;i<size;i++)
+	{
+		QString val;
+		ostringstream convert;
+		ui.transact_report->insertRow(j);
+		ui.transact_report->setSortingEnabled(false);
+		QTableWidgetItem *item1;
+		tmp=iList[i];
+		for (int z=0;z<6;z++)
+		{
+			switch(z)
+			{
+			case 0:
+				val= QString::fromStdString(tmp->get_tId_toStr());
+				break;
+			case 1:
+				val= QString::fromStdString(tmp->get_cId_toStr());
+				break;
+			case 2:
+				val= QString::fromStdString(tmp->get_iId_toStr());
+				break;
+			case 3:
+				val= QString::fromStdString(tmp->get_Quantity_toStr());
+				break;
+			case 4:
+				revenue=tmp->get_Price()*tmp->get_Quantity();
+				convert << revenue;
+				val = QString::fromStdString(convert.str());
+				break;
+			case 5:
+				val = QString::fromStdString(tmp->get_Date());
+				break;
+			}
+			//ui.item_table->setRowCount(j);
+			ui.transact_report->setItem(j,z,new QTableWidgetItem(val));
+		}
+		delete tmp;
+	}
+	
+	iList.clear();
+	delete contor;
 }

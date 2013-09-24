@@ -522,3 +522,36 @@ int sql_Connector::update_stock(string barcode, string iQuantity, UpStock type)
 		return 0;
 	}
 }
+
+int sql_Connector::get_Curdate_Transaction(vector<Transaction*> &iList)
+{
+	try
+	{
+		Transaction *Itrans;
+		int count=0;
+		string query="SELECT * FROM  local_transaction l, item i WHERE l.tDate=CURDATE() and i.itemId=l.itemId ORDER BY l.tId ASC" ; 
+		stmt=con->createStatement();
+		res=stmt->executeQuery(query);
+		while (res->next())
+		{
+			count++;
+			Itrans=new Transaction();
+			Itrans->set_cId(res->getInt("cId"));
+			Itrans->set_tId(res->getInt("tId"));
+			Itrans->set_iId(res->getInt("itemId"));
+			Itrans->set_Date(res->getString("tDate"));
+			Itrans->set_Quantity(res->getInt("Unit_Sold"));
+			Itrans->set_Price(res->getDouble("price"));
+			iList.push_back(Itrans);
+		}
+		if (count!=1)
+			return 0;
+		else
+			return 1;
+	}
+	catch (sql::SQLException &e) {
+		std::cout<<e.what()<<endl;
+		system("PAUSE");
+		exit(1);
+	}
+}

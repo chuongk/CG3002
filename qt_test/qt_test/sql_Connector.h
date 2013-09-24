@@ -23,6 +23,7 @@ using namespace std;
 #include "mysql_error.h"
 #include <cppconn\sqlstring.h>
 #include "item.h"
+#include "Transaction.h"
 using namespace sql;
 
 #define Server "localhost"
@@ -59,6 +60,7 @@ public:
 
 	int search_cashier_from_cId(int cId);
 	int update_stock(string barcode, string iQuantity, UpStock type);
+	int get_Curdate_Transaction(vector<Transaction*> &iList);
 private:
 	void populate_Cashier_from_FILE(string file_name,int SID);
 	string toDate(string toCut);

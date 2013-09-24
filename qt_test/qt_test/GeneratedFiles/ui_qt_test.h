@@ -56,6 +56,14 @@ public:
     QLabel *label_4;
     QLineEdit *manu_line;
     QLabel *result_label;
+    QWidget *tab_4;
+    QTabWidget *transact_table;
+    QWidget *tab_5;
+    QTableWidget *transact_report;
+    QWidget *tab_6;
+    QLabel *label_5;
+    QPushButton *sync_button;
+    QPushButton *pushButton_2;
     QWidget *tab;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
@@ -202,6 +210,50 @@ public:
         result_label->setObjectName(QStringLiteral("result_label"));
         result_label->setGeometry(QRect(530, 10, 111, 21));
         tabWidget->addTab(tab_3, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QStringLiteral("tab_4"));
+        transact_table = new QTabWidget(tab_4);
+        transact_table->setObjectName(QStringLiteral("transact_table"));
+        transact_table->setGeometry(QRect(0, 40, 711, 321));
+        tab_5 = new QWidget();
+        tab_5->setObjectName(QStringLiteral("tab_5"));
+        transact_report = new QTableWidget(tab_5);
+        if (transact_report->columnCount() < 6)
+            transact_report->setColumnCount(6);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        __qtablewidgetitem8->setFont(font);
+        transact_report->setHorizontalHeaderItem(0, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        __qtablewidgetitem9->setFont(font);
+        transact_report->setHorizontalHeaderItem(1, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        __qtablewidgetitem10->setFont(font);
+        transact_report->setHorizontalHeaderItem(2, __qtablewidgetitem10);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        __qtablewidgetitem11->setFont(font);
+        transact_report->setHorizontalHeaderItem(3, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        __qtablewidgetitem12->setFont(font);
+        transact_report->setHorizontalHeaderItem(4, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        __qtablewidgetitem13->setFont(font);
+        transact_report->setHorizontalHeaderItem(5, __qtablewidgetitem13);
+        transact_report->setObjectName(QStringLiteral("transact_report"));
+        transact_report->setGeometry(QRect(0, 0, 701, 291));
+        transact_table->addTab(tab_5, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName(QStringLiteral("tab_6"));
+        transact_table->addTab(tab_6, QString());
+        label_5 = new QLabel(tab_4);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(0, 10, 46, 13));
+        sync_button = new QPushButton(tab_4);
+        sync_button->setObjectName(QStringLiteral("sync_button"));
+        sync_button->setGeometry(QRect(420, 30, 75, 23));
+        pushButton_2 = new QPushButton(tab_4);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(500, 30, 91, 23));
+        tabWidget->addTab(tab_4, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         layoutWidget1 = new QWidget(tab);
@@ -234,10 +286,10 @@ public:
         tableWidget = new QTableWidget(tab_2);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem8);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem14);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem15);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
         tableWidget->setGeometry(QRect(160, 80, 256, 192));
         tabWidget->addTab(tab_2, QString());
@@ -255,7 +307,7 @@ public:
 
         retranslateUi(qt_testClass);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(qt_testClass);
@@ -291,12 +343,30 @@ public:
         manu_line->setText(QString());
         result_label->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("qt_testClass", "Search Item", 0));
+        QTableWidgetItem *___qtablewidgetitem8 = transact_report->horizontalHeaderItem(0);
+        ___qtablewidgetitem8->setText(QApplication::translate("qt_testClass", "Transaction ID", 0));
+        QTableWidgetItem *___qtablewidgetitem9 = transact_report->horizontalHeaderItem(1);
+        ___qtablewidgetitem9->setText(QApplication::translate("qt_testClass", "Cashier ID", 0));
+        QTableWidgetItem *___qtablewidgetitem10 = transact_report->horizontalHeaderItem(2);
+        ___qtablewidgetitem10->setText(QApplication::translate("qt_testClass", "Item ID", 0));
+        QTableWidgetItem *___qtablewidgetitem11 = transact_report->horizontalHeaderItem(3);
+        ___qtablewidgetitem11->setText(QApplication::translate("qt_testClass", "Unit Sold", 0));
+        QTableWidgetItem *___qtablewidgetitem12 = transact_report->horizontalHeaderItem(4);
+        ___qtablewidgetitem12->setText(QApplication::translate("qt_testClass", "Revenue", 0));
+        QTableWidgetItem *___qtablewidgetitem13 = transact_report->horizontalHeaderItem(5);
+        ___qtablewidgetitem13->setText(QApplication::translate("qt_testClass", "Date", 0));
+        transact_table->setTabText(transact_table->indexOf(tab_5), QApplication::translate("qt_testClass", "Today", 0));
+        transact_table->setTabText(transact_table->indexOf(tab_6), QApplication::translate("qt_testClass", "Tab 2", 0));
+        label_5->setText(QApplication::translate("qt_testClass", "Sort by", 0));
+        sync_button->setText(QApplication::translate("qt_testClass", "Sync", 0));
+        pushButton_2->setText(QApplication::translate("qt_testClass", "Generate Report", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("qt_testClass", "Transactions", 0));
         pushButton->setText(QApplication::translate("qt_testClass", "PushButton", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("qt_testClass", "To PHP MyAdmin", 0));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem8->setText(QApplication::translate("qt_testClass", "Abc", 0));
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem9->setText(QApplication::translate("qt_testClass", "BCd", 0));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem14->setText(QApplication::translate("qt_testClass", "Abc", 0));
+        QTableWidgetItem *___qtablewidgetitem15 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem15->setText(QApplication::translate("qt_testClass", "BCd", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("qt_testClass", "Tab 2", 0));
     } // retranslateUi
 
