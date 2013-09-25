@@ -63,12 +63,17 @@ public:
     QWidget *tab_6;
     QLabel *label_5;
     QLabel *transact_result;
-    QWidget *widget;
+    QWidget *layoutWidget1;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *transact_open_file;
+    QLineEdit *transact_file;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *sync_button;
     QPushButton *transact_generate_Report;
+    QPushButton *transact_send;
     QWidget *tab;
-    QWidget *layoutWidget1;
+    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QTextEdit *textEdit;
@@ -252,43 +257,70 @@ public:
         label_5->setGeometry(QRect(0, 10, 46, 13));
         transact_result = new QLabel(tab_4);
         transact_result->setObjectName(QStringLiteral("transact_result"));
-        transact_result->setGeometry(QRect(280, 0, 241, 51));
+        transact_result->setGeometry(QRect(190, 0, 241, 51));
         transact_result->setWordWrap(true);
-        widget = new QWidget(tab_4);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(530, 30, 172, 25));
-        horizontalLayout_2 = new QHBoxLayout(widget);
+        layoutWidget1 = new QWidget(tab_4);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(450, 0, 255, 58));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget1);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        transact_open_file = new QPushButton(layoutWidget1);
+        transact_open_file->setObjectName(QStringLiteral("transact_open_file"));
+
+        horizontalLayout_3->addWidget(transact_open_file);
+
+        transact_file = new QLineEdit(layoutWidget1);
+        transact_file->setObjectName(QStringLiteral("transact_file"));
+
+        horizontalLayout_3->addWidget(transact_file);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        sync_button = new QPushButton(widget);
+        sync_button = new QPushButton(layoutWidget1);
         sync_button->setObjectName(QStringLiteral("sync_button"));
 
         horizontalLayout_2->addWidget(sync_button);
 
-        transact_generate_Report = new QPushButton(widget);
+        transact_generate_Report = new QPushButton(layoutWidget1);
         transact_generate_Report->setObjectName(QStringLiteral("transact_generate_Report"));
 
         horizontalLayout_2->addWidget(transact_generate_Report);
 
+        transact_send = new QPushButton(layoutWidget1);
+        transact_send->setObjectName(QStringLiteral("transact_send"));
+
+        horizontalLayout_2->addWidget(transact_send);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_2);
+
         tabWidget->addTab(tab_4, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        layoutWidget1 = new QWidget(tab);
-        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 0, 339, 73));
-        horizontalLayout = new QHBoxLayout(layoutWidget1);
+        layoutWidget2 = new QWidget(tab);
+        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(0, 0, 339, 73));
+        horizontalLayout = new QHBoxLayout(layoutWidget2);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(layoutWidget1);
+        pushButton = new QPushButton(layoutWidget2);
         pushButton->setObjectName(QStringLiteral("pushButton"));
 
         horizontalLayout->addWidget(pushButton);
 
-        textEdit = new QTextEdit(layoutWidget1);
+        textEdit = new QTextEdit(layoutWidget2);
         textEdit->setObjectName(QStringLiteral("textEdit"));
 
         horizontalLayout->addWidget(textEdit);
@@ -378,8 +410,10 @@ public:
         transact_table->setTabText(transact_table->indexOf(tab_6), QApplication::translate("qt_testClass", "Tab 2", 0));
         label_5->setText(QApplication::translate("qt_testClass", "Sort by", 0));
         transact_result->setText(QApplication::translate("qt_testClass", "TextLabel", 0));
+        transact_open_file->setText(QApplication::translate("qt_testClass", "Open Fie", 0));
         sync_button->setText(QApplication::translate("qt_testClass", "Sync", 0));
         transact_generate_Report->setText(QApplication::translate("qt_testClass", "Generate Report", 0));
+        transact_send->setText(QApplication::translate("qt_testClass", "Send", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("qt_testClass", "Transactions", 0));
         pushButton->setText(QApplication::translate("qt_testClass", "PushButton", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("qt_testClass", "To PHP MyAdmin", 0));

@@ -399,7 +399,7 @@
      <widget class="QLabel" name="transact_result">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>190</x>
         <y>0</y>
         <width>241</width>
         <height>51</height>
@@ -412,29 +412,54 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>30</y>
-        <width>172</width>
-        <height>25</height>
+        <x>450</x>
+        <y>0</y>
+        <width>255</width>
+        <height>58</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QPushButton" name="sync_button">
-         <property name="text">
-          <string>Sync</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="transact_open_file">
+           <property name="text">
+            <string>Open Fie</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="transact_file"/>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="transact_generate_Report">
-         <property name="text">
-          <string>Generate Report</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="sync_button">
+           <property name="text">
+            <string>Sync</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="transact_generate_Report">
+           <property name="text">
+            <string>Generate Report</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="transact_send">
+           <property name="text">
+            <string>Send</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
