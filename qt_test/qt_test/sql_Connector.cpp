@@ -523,6 +523,7 @@ int sql_Connector::update_stock(string barcode, string iQuantity, UpStock type)
 	}
 }
 
+
 int sql_Connector::get_Curdate_Transaction(vector<Transaction*> &iList)
 {
 	try

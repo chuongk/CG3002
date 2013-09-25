@@ -62,8 +62,11 @@ public:
     QTableWidget *transact_report;
     QWidget *tab_6;
     QLabel *label_5;
+    QLabel *transact_result;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout_2;
     QPushButton *sync_button;
-    QPushButton *pushButton_2;
+    QPushButton *transact_generate_Report;
     QWidget *tab;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
@@ -247,12 +250,28 @@ public:
         label_5 = new QLabel(tab_4);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(0, 10, 46, 13));
-        sync_button = new QPushButton(tab_4);
+        transact_result = new QLabel(tab_4);
+        transact_result->setObjectName(QStringLiteral("transact_result"));
+        transact_result->setGeometry(QRect(280, 0, 241, 51));
+        transact_result->setWordWrap(true);
+        widget = new QWidget(tab_4);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(530, 30, 172, 25));
+        horizontalLayout_2 = new QHBoxLayout(widget);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        sync_button = new QPushButton(widget);
         sync_button->setObjectName(QStringLiteral("sync_button"));
-        sync_button->setGeometry(QRect(420, 30, 75, 23));
-        pushButton_2 = new QPushButton(tab_4);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(500, 30, 91, 23));
+
+        horizontalLayout_2->addWidget(sync_button);
+
+        transact_generate_Report = new QPushButton(widget);
+        transact_generate_Report->setObjectName(QStringLiteral("transact_generate_Report"));
+
+        horizontalLayout_2->addWidget(transact_generate_Report);
+
         tabWidget->addTab(tab_4, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
@@ -358,8 +377,9 @@ public:
         transact_table->setTabText(transact_table->indexOf(tab_5), QApplication::translate("qt_testClass", "Today", 0));
         transact_table->setTabText(transact_table->indexOf(tab_6), QApplication::translate("qt_testClass", "Tab 2", 0));
         label_5->setText(QApplication::translate("qt_testClass", "Sort by", 0));
+        transact_result->setText(QApplication::translate("qt_testClass", "TextLabel", 0));
         sync_button->setText(QApplication::translate("qt_testClass", "Sync", 0));
-        pushButton_2->setText(QApplication::translate("qt_testClass", "Generate Report", 0));
+        transact_generate_Report->setText(QApplication::translate("qt_testClass", "Generate Report", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("qt_testClass", "Transactions", 0));
         pushButton->setText(QApplication::translate("qt_testClass", "PushButton", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("qt_testClass", "To PHP MyAdmin", 0));

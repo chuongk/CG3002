@@ -14,7 +14,7 @@ qt_test::qt_test(QWidget *parent)
 */
 void qt_test::Initialize()
 {
-	
+	ui.transact_result->setText("");
 }
 
 
@@ -149,6 +149,52 @@ void qt_test::on_SearchButton_clicked()
 
 void qt_test::on_sync_button_clicked()
 {
+	// Get the current tab
+	int cur_tab=ui.transact_table->currentIndex();
+	string filename;
+	switch (cur_tab)
+	{
+	case 0:	// Sorting by today
+		transact_by_Curdate(filename);
+		break;
+	}
+	
+}
+
+void qt_test::on_transact_generate_Report_clicked()
+{
+	// Get the current tab
+	int cur_tab=ui.transact_table->currentIndex();
+	string filename;
+	ostringstream res;
+	string result;
+	switch (cur_tab)
+	{
+	case 0:	// Sorting by today
+		res=transact_by_Curdate(filename);
+		result=res.str();
+		break;
+	}
+	// Save to file
+	ofstream myfile (filename+".txt");
+	myfile<<result;
+	myfile.close();
+
+	//Display the result
+	ui.transact_result->setStyleSheet("QLabel { color : green; font: bold 12px; }");
+	string gen_res= "Report name: " + filename +".txt genereated";
+	ui.transact_result->setText(QString::fromStdString(gen_res));
+}
+
+/*
+	Populate the table with today transaction
+	Return the ostring of all the transactions info incase need to write to file
+	the filename is in the argument
+*/
+ostringstream qt_test::transact_by_Curdate(string &filename)
+{
+
+	ostringstream result;
 	int j = ui.transact_report->rowCount();
 	if (j>0)
 	{
@@ -197,14 +243,32 @@ void qt_test::on_sync_button_clicked()
 				break;
 			case 5:
 				val = QString::fromStdString(tmp->get_Date());
+				filename=tmp->get_Date();
 				break;
 			}
 			//ui.item_table->setRowCount(j);
 			ui.transact_report->setItem(j,z,new QTableWidgetItem(val));
+			result<< val.toStdString();
+			if (z<5)
+				result<<":";
+			else
+				result<<"\n";
 		}
 		delete tmp;
 	}
 	
+	ui.transact_result->setStyleSheet("QLabel { color : green; font: bold 12px; }");
+	string trans_res="Sync complete, " + convert_from_int(size) + " results found";
+	ui.transact_result->setText(QString::fromStdString(trans_res));
 	iList.clear();
 	delete contor;
+
+	return result;
+}
+
+string qt_test::convert_from_int(int toCon)
+{
+	ostringstream convert;
+	convert<<toCon;
+	return convert.str();
 }
